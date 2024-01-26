@@ -1,0 +1,19 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "request":"./request.sh",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^1.5.1",
+    "dotenv": "^16.3.1"
+  },
+  "dependencies": {
+    "xml2js": "^0.6.2"
+  }
+}
