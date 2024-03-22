@@ -1,24 +1,38 @@
-require('dotenv').config();
+import { config } from 'dotenv';
+config();
+import axios from 'axios';
 
-const userInfo = {
-  action: process.env.REQUEST,
-  start: process.env.START,
-  end: process.env.END,
-  accessToken: process.env.GAROON_API_TOKEN,
-  garoonUserId: process.env.GAROON_USER_ID,
-  domain: process.env.DOMAIN,
-  cybozu: process.env.CYBOZU
+function createRecord(index) {
+  return {
+    タイトル: { value: index.toString() },
+    creater: { value: chobiitUserName },
+    updater: { value: chobiitUserName },
+    レコード作成日時: { value: "2023-09-20T10:00" },
+    レコード更新日時: { value: "2023-09-21T10:30" },
+    GroupSetting: { value: "saitom dev group" }
+  };
 }
-console.log("userInfo >",userInfo)
-
-if(userInfo.cybozu == "Garoon"){
-  if(userInfo.action == "Get"){
-
-  } else if(userInfo.action == "Delete") {
-    deleteGaroonEvents(userInfo);
-  } else if(userInfo.action == "DeleteEvents"){
-    deleteGaroonRepeatEvents(userInfo);
+  
+  const records = [];
+  for (let i = 101; i <= 101; i++) {
+    records.push(createRecord(i));
   }
-} else if(userInfo.cybozu == "Kintone") {
 
-}
+  axios({
+    method: 'post',
+    url: `https://${subdomain}/k/v1/records.json`,
+    headers: {
+      'X-Cybozu-API-Token': apiToken,
+      'Content-Type': 'application/json',
+    },
+    data: {
+      app: appId,
+      records: records,
+    },
+  })
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
