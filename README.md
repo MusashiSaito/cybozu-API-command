@@ -1,0 +1,9 @@
+# About
+Add .env
+
+```
+DOMAIN=
+KINTONE_APP_ID=
+GAROON_API_TOKEN=
+GAROON_USER_ID=
+```
