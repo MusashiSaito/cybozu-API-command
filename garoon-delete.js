@@ -3,9 +3,13 @@ config();
 import axios from 'axios';
 const domain = process.env.DOMAIN;
 const accessToken = process.env.ACCESS_TOKEN;
-const user_id = 165;
-const start = 1523672;
-const end = 25332604;
+
+const user_id = 100;
+const user_id2 = 11;
+const start = 1526092;
+const end = 1528035;
+
+console.log(domain, accessToken)
 
 eventDelete();
 
@@ -18,17 +22,17 @@ async function eventDelete(){
     }
   }
   for(let i = start; i < end; i ++){
-    const getGaroonEvent = await garoonGetRequest(i, domain, header)
-    console.log("getGaroonEvent",getGaroonEvent)
-    if(getGaroonEvent){
-      const checkId = await checkUserId(getGaroonEvent, user_id)
-      console.log(checkId)
-      if(checkId){
+    // const getGaroonEvent = await garoonGetRequest(i, domain, header)
+    // console.log("getGaroonEvent",getGaroonEvent)
+    // if(getGaroonEvent){
+    //   const checkId = await checkUserId(getGaroonEvent, user_id)
+    //   console.log(checkId)
+    //   if(checkId){
         await garoonDeleteRequest(i, domain, header);
-      }
-    } else {
-      console.log("No get")
-    }
+  //     }
+  //   } else {
+  //     console.log("No get")
+  //   }
   }
 }
 
@@ -53,7 +57,8 @@ async function garoonDeleteRequest(id, domain, header){
   .then(() => {
     console.log(`${id} >> Delete!`)
   })
-  .catch(() => {
+  .catch((err) => {
+    console.log(err.response.data)
     console.log(`${id} >> No Delete!`)
   })
 }
